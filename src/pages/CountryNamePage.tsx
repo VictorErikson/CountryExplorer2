@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../config/api";
 import { saveCountry, type Country } from "../redux/countriesSlice";
+import CountryCard from "../components/icons/CountryCard";
 
 export default function CountryNamePage() {
   const [country, setCountry] = useState<Country | null>(null);
   const { countryName } = useParams();
+  const [neighbors, setNeighbors] = useState<Country[]>([]);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -23,6 +25,26 @@ export default function CountryNamePage() {
   }, [savedCountries]);
 
   useEffect(() => {
+    if (!country?.borders) return;
+    const neighborsString = country?.borders.join(",");
+
+    const fetchData = async () => {
+      const response = await fetch(
+        BASE_URL +
+          "alpha?codes=" +
+          neighborsString +
+          "&fields=name,capital,currencies,maps,population,flags,region,fifa,borders"
+      );
+      const json = await response.json();
+      setNeighbors(json);
+    };
+
+    if (country) {
+      fetchData();
+    }
+  }, [country]);
+
+  useEffect(() => {
     const found = countries.find(
       (country) => country.name.common === countryName
     );
@@ -34,7 +56,7 @@ export default function CountryNamePage() {
           BASE_URL +
             "name/" +
             countryName +
-            "?fields=name,capital,currencies,maps,population,flags,region,fifa"
+            "?fields=name,capital,currencies,maps,population,flags,region,fifa,borders"
         );
         const json = await response.json();
         setCountry(json[0]);
@@ -49,24 +71,36 @@ export default function CountryNamePage() {
     <>
       {country && (
         <div>
-          <img src={country.flags.svg} alt={country.flags.alt} />
-          <button onClick={() => dispatch(saveCountry(country))}>
-            {savedCountries.some((c) => c.name.common === country.name.common)
-              ? "Unsave"
-              : "Save"}
-          </button>
-          <h2>{country.name.common}</h2>
-          {firstCurrency && (
-            <h3>
-              {firstCurrency.name} ({firstCurrency.symbol})
-            </h3>
+          <div>
+            <img src={country.flags.svg} alt={country.flags.alt} />
+            <button onClick={() => dispatch(saveCountry(country))}>
+              {savedCountries.some((c) => c.name.common === country.name.common)
+                ? "Unsave"
+                : "Save"}
+            </button>
+            <h2>{country.name.common}</h2>
+            {firstCurrency && (
+              <h3>
+                {firstCurrency.name} ({firstCurrency.symbol})
+              </h3>
+            )}
+            <h3>Population {country.population}</h3>
+            <h3>Capital {country.capital}</h3>
+            <h3>fifa: {country.fifa}</h3>
+            <a href={country.maps.googleMaps}>
+              Map(göra denna till en bild på google-maps?)
+            </a>
+          </div>
+          {neighbors.length > 0 && (
+            <div className="neighbors">
+              {neighbors.map((neighbor) => (
+                <CountryCard
+                  name={neighbor.name.common}
+                  flags={neighbor.flags}
+                />
+              ))}
+            </div>
           )}
-          <h3>Population {country.population}</h3>
-          <h3>Capital {country.capital}</h3>
-          <h3>fifa: {country.fifa}</h3>
-          <a href={country.maps.googleMaps}>
-            Map(göra denna till en bild på google-maps?)
-          </a>
         </div>
       )}
     </>

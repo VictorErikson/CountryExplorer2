@@ -8,6 +8,7 @@ import type { Region } from "../types";
 import CountryCard from "../components/icons/CountryCard";
 
 export default function CountriesPage() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const regions: Region[] = [
     "All",
     "Europe",
@@ -16,15 +17,18 @@ export default function CountriesPage() {
     "Americas",
     "Africa",
   ];
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
+
   const selectedRegion = useSelector(
     (state: RootState) => state.countries.region
   );
   const countries = useSelector(
     (state: RootState) => state.countries.countries
   );
+  useEffect(() => {
+    dispatch(selectRegion("All"));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchCountries(selectedRegion));

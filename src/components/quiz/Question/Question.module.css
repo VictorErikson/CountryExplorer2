@@ -1,0 +1,33 @@
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.answerBtn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.answerBtn:hover:not(:disabled) {
+  background: #f7f7f7;
+}
+
+.correct {
+  border-color: #2e7d32;
+  background: #7afa85;
+}
+
+.wrong {
+  border-color: #c62828;
+  background: #eb556b;
+}
+
+.answerBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
