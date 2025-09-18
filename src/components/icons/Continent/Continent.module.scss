@@ -1,0 +1,19 @@
+button.dropdownToggle {
+  .left,
+  .right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  svg.arrow {
+    height: 25px;
+    width: 25px;
+  }
+}

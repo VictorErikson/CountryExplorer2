@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { Region } from "../../../types";
-import Continent from "../../icons/Continent";
+import Continent from "../../icons/Continent/Continent";
 import { ICONS } from "../../icons/Icons";
 import type { AppDispatch, RootState } from "../../../redux/configureStore";
 import { selectRegion } from "../../../redux/countriesSlice";

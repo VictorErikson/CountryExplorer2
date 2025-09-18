@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/configureStore";
-import CountryCard from "../components/icons/CountryCard";
+import CountryCard from "../components/icons/CountryCard/CountryCard";
 
 export default function CollectionPage() {
   const savedCountries = useSelector(

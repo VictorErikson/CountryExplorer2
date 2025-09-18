@@ -1,0 +1,69 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 410px;
+  .countryDropdown {
+    button {
+      font-family: Fredoka, Arial, Helvetica, sans-serif;
+      color: white;
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      width: 100%;
+      font-size: x-large;
+      border: 2px solid #1c2333;
+      border-radius: 40px;
+      padding: 8px 12px;
+
+      &:hover {
+        background: #1c2333;
+      }
+    }
+    .dropdown-toggle {
+      display: flex;
+      flex-direction: row;
+      font-family: Fredoka, Arial, Helvetica, sans-serif;
+    }
+    .dropdownList {
+      font-size: large;
+      display: flex;
+      flex-direction: column;
+
+      li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 10px;
+        padding: 6px 12px;
+        gap: 16px;
+
+        &:hover {
+          color: rgb(255, 255, 255);
+          background: #252945;
+        }
+      }
+      .icon {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+    }
+  }
+  margin-left: 20px;
+  margin-right: 20px;
+  .video {
+    width: "100%";
+
+    border-radius: 28px;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

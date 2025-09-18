@@ -10,7 +10,6 @@ import shuffle from "../utils/shuffle";
 import QuizResults from "../components/quiz/QuizResults/QuizResults";
 import QuizActive from "../components/quiz/QuizActive/QuizActive";
 import QuizStart from "../components/quiz/QuizStart/QuizStart";
-import { useNavigate } from "react-router-dom";
 
 export default function QuizPage() {
   const [quizActive, setQuizActive] = useState(false);
@@ -22,7 +21,6 @@ export default function QuizPage() {
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState<null | boolean>(null);
-  let navigate = useNavigate();
 
   const isLast = i === questions.length - 1;
   const currentQuestion = questions[i];

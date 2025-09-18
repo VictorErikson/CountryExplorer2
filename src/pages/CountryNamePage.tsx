@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../config/api";
 import { saveCountry, type Country } from "../redux/countriesSlice";
-import CountryCard from "../components/icons/CountryCard";
+import CountryCard from "../components/icons/CountryCard/CountryCard";
 
 export default function CountryNamePage() {
   const [country, setCountry] = useState<Country | null>(null);

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import Continent from "../components/icons/Continent";
+import Continent from "../../components/icons/Continent/Continent";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../redux/configureStore";
-import { ICONS } from "../components/icons/Icons";
-import { fetchCountries, selectRegion } from "../redux/countriesSlice";
-import type { Region } from "../types";
-import CountryCard from "../components/icons/CountryCard";
+import type { AppDispatch, RootState } from "../../redux/configureStore";
+import { ICONS } from "../../components/icons/Icons";
+import { fetchCountries, selectRegion } from "../../redux/countriesSlice";
+import type { Region } from "../../types";
+import CountryCard from "../../components/icons/CountryCard/CountryCard";
+import styles from "./CountriesPage.module.scss";
+import africaVideo from "../../assets/videos/africa.mp4";
 
 export default function CountriesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -39,17 +41,22 @@ export default function CountriesPage() {
   };
 
   return (
-    <>
-      <div className="country-dropdown">
+    <main className={styles.main}>
+      {selectedRegion === "All" ? (
+        <h1>All Countrys</h1>
+      ) : (
+        <h1>{selectedRegion}</h1>
+      )}
+      <div className={styles.countryDropdown}>
         <Continent
           dropdownOpen={dropdownOpen}
           toggleDropdown={toggleDropdown}
         />
         {dropdownOpen && (
-          <ul className="dropdown-list">
+          <ul className={styles.dropdownList}>
             {regions.map((region) => {
               if (region === selectedRegion) return null;
-              const Icon = ICONS[region];
+              const iconUrl = ICONS[region];
               return (
                 <li
                   key={region}
@@ -58,7 +65,11 @@ export default function CountriesPage() {
                     setDropdownOpen(false);
                   }}
                 >
-                  <Icon className="continent-component" />
+                  <img
+                    className={styles.icon}
+                    src={iconUrl}
+                    alt={`${region} icon`}
+                  />
                   {region}
                 </li>
               );
@@ -66,6 +77,16 @@ export default function CountriesPage() {
           </ul>
         )}
       </div>
+      <video
+        className={styles.video}
+        src={africaVideo}
+        // controls
+        preload="metadata"
+        autoPlay
+        muted
+        playsInline
+        loop
+      />
       {countries && (
         <ul>
           {countries.map((country) => (
@@ -73,10 +94,11 @@ export default function CountriesPage() {
               key={country.name.common}
               name={country.name.common}
               flags={country.flags}
+              region={country.region}
             />
           ))}
         </ul>
       )}
-    </>
+    </main>
   );
 }

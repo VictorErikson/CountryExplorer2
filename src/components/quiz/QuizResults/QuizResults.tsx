@@ -50,7 +50,7 @@ export default function QuizResults({
         <h3>Congratulations, you made it top 3 on the {region}-leaderboard!</h3>
       )}
       <div className="leaderboard">
-        <h3>{region}´s, highscore:</h3>
+        <h3>{region}, highscore:</h3>
         {top3 &&
           top3.map((score: UserScore, i) => (
             <div className="score">
