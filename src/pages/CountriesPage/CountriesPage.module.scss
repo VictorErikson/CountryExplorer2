@@ -2,7 +2,14 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 410px;
+  width: 60vw;
+  min-width: 410px;
+  max-width: 830px;
+
+  h1 {
+    font-size: xxx-large;
+  }
+
   .countryDropdown {
     button {
       font-family: Fredoka, Arial, Helvetica, sans-serif;
@@ -19,6 +26,7 @@
       border: 2px solid #1c2333;
       border-radius: 40px;
       padding: 8px 12px;
+      margin-bottom: 10px;
 
       &:hover {
         background: #1c2333;
@@ -62,8 +70,19 @@
     border-radius: 28px;
   }
   ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    // display: flex;
+    // flex-direction: column;
+    // gap: 10px;
+    // flex-wrap: nowrap;
+
+    display: grid;
+    grid-template-columns: 1fr; /* default: 1 column */
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @media (min-width: 1170px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

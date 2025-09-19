@@ -7,7 +7,7 @@ import { fetchCountries, selectRegion } from "../../redux/countriesSlice";
 import type { Region } from "../../types";
 import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CountriesPage.module.scss";
-import africaVideo from "../../assets/videos/africa.mp4";
+import { MEDIA } from "../../config/media";
 
 export default function CountriesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -25,6 +25,8 @@ export default function CountriesPage() {
   const selectedRegion = useSelector(
     (state: RootState) => state.countries.region
   );
+  const { video, poster } = MEDIA[selectedRegion];
+
   const countries = useSelector(
     (state: RootState) => state.countries.countries
   );
@@ -79,9 +81,10 @@ export default function CountriesPage() {
       </div>
       <video
         className={styles.video}
-        src={africaVideo}
+        src={video}
+        poster={poster}
         // controls
-        preload="metadata"
+        preload="auto"
         autoPlay
         muted
         playsInline
@@ -90,12 +93,7 @@ export default function CountriesPage() {
       {countries && (
         <ul>
           {countries.map((country) => (
-            <CountryCard
-              key={country.name.common}
-              name={country.name.common}
-              flags={country.flags}
-              region={country.region}
-            />
+            <CountryCard key={country.name.common} country={country} />
           ))}
         </ul>
       )}

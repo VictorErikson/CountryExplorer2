@@ -67,6 +67,51 @@ export default function CountryNamePage() {
 
   const firstCurrency = country && Object.values(country.currencies)[0];
 
+  function staticMapForCountry(country: string, key: string) {
+    const params = new URLSearchParams({
+      center: country, // Google will geocode the name
+      zoom: "4", // tune per your design
+      size: "640x360",
+      scale: "2",
+      maptype: "roadmap",
+      key,
+    });
+    return `https://maps.googleapis.com/maps/api/staticmap?${params}`;
+  }
+
+  function staticMapUrl(
+    center: { lat?: number; lng?: number; zoom?: number; query?: string },
+    key: string,
+    { width = 640, height = 360, maptype = "roadmap" } = {}
+  ) {
+    const params = new URLSearchParams({
+      size: `${width}x${height}`,
+      scale: "2",
+      maptype,
+      key,
+    });
+    if (center.lat != null && center.lng != null) {
+      params.set("center", `${center.lat},${center.lng}`);
+      params.set("zoom", String(center.zoom ?? 4));
+    } else if (center.query) {
+      params.set("center", center.query);
+      params.set("zoom", "4");
+    } else {
+      throw new Error("No center found");
+    }
+    return `https://maps.googleapis.com/maps/api/staticmap?${params}`;
+  }
+
+  async function mapFromShortLink(shortUrl: string, key: string) {
+    const expanded = await expandGoo(shortUrl);
+    const parsed = parseMapsUrl(expanded);
+    if (!parsed) throw new Error("Could not parse expanded Maps URL");
+    return staticMapUrl(parsed, key);
+  }
+  // Usage:
+  // const imgSrc = await mapFromShortLink("https://goo.gl/maps/Z8mQ6jxnRQKFwJy9A", GOOGLE_KEY);
+  // <img src={imgSrc} alt="Country map" />
+
   return (
     <>
       {country && (
@@ -94,10 +139,7 @@ export default function CountryNamePage() {
           {neighbors.length > 0 && (
             <div className="neighbors">
               {neighbors.map((neighbor) => (
-                <CountryCard
-                  name={neighbor.name.common}
-                  flags={neighbor.flags}
-                />
+                <CountryCard country={neighbor} key={neighbor.name.common} />
               ))}
             </div>
           )}

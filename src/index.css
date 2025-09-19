@@ -1,24 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 body {
-    background: #0b1124;
+    
     color: white;
     font-family: Fredoka, Arial, Helvetica, sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    margin-top: 80px;
-}
-/* main{
+    background: #0b1124;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 5px;
-} */
+    
+    
+}
+.backgroundContainer{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* min-height: 100vh;
+    min-width: 100vw; */
+}
+
+
 a {
     color: white;
     text-decoration: none;

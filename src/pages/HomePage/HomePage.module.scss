@@ -1,0 +1,76 @@
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 140px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo {
+    width: 150px;
+    padding-bottom: 60px;
+  }
+
+  .link {
+    height: 35px;
+    width: 230px;
+    font-size: 25px;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    background: #1c2333;
+    padding: 6px 16px;
+    border-radius: 10px;
+    &:hover {
+      background: #252945;
+      animation: pulse 1.2s ease-in-out infinite alternate;
+      color: rgb(255, 214, 32);
+    }
+  }
+  .videoBackground {
+    position: absolute;
+    inset: 0; /* shorthand for top/right/bottom/left:0 */
+    /* fallback background color */
+    z-index: 0;
+    // min-width: 100vw;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* cover container */
+      opacity: 0.07; /* 10% */
+    }
+  }
+  .content {
+    position: relative;
+    z-index: 1; /* ensures text sits above video */
+    color: white;
+  }
+}
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  } /* adjust intensity */
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-wrap:hover .pulse-target {
+    animation: none;
+  }
+}

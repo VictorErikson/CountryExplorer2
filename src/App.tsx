@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import CountriesPage from "./pages/CountriesPage/CountriesPage";
 import CountryNamePage from "./pages/CountryNamePage";
 import CollectionPage from "./pages/CollectionPage";

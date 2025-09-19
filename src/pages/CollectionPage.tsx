@@ -12,7 +12,7 @@ export default function CollectionPage() {
       <h1>Country collection:</h1>
       {savedCountries.map((country) => (
         <div key={country.name.common}>
-          <CountryCard name={country.name.common} flags={country.flags} />
+          <CountryCard country={country} />
         </div>
       ))}
     </div>

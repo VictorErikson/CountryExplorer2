@@ -5,6 +5,7 @@
   border-radius: 20px;
   padding: 8px 12px;
   border: none;
+  // max-width: 600px;
 
   &:hover {
     background: #252945;
@@ -36,12 +37,25 @@
       }
 
       .region {
-        padding: 2px 0px;
-        width: 84px;
-        border-radius: 999px;
-        display: flex;
-        justify-content: center;
+        display: inline-flex; /* size to content */
         align-items: center;
+        justify-content: center;
+        padding: 2px 12px;
+
+        min-width: 84px; /* floor */
+        width: fit-content; /* content-based width */
+        box-sizing: border-box;
+
+        flex: 0 0 auto; /* if it's inside a flex parent */
+        max-width: 100%;
+        // padding: 2px 12px;
+        // width: auto;
+        // min-width: 84px;
+
+        border-radius: 999px;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
       }
 
       .europe {
