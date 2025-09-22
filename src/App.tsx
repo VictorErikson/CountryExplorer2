@@ -6,6 +6,7 @@ import CountryNamePage from "./pages/CountryNamePage/CountryNamePage";
 import CollectionPage from "./pages/CollectionPage";
 import QuizPage from "./pages/QuizPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
+import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryName" element={<CountryNamePage />} />
         <Route path="/collection" element={<CollectionPage />} />
+        <Route path="/game" element={<GamePage />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Routes>

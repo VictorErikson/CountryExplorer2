@@ -11,12 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
 
+export const GOOGLE_KEY = "AIzaSyAIP9n7rVJZXLDB81HvftDMIbwPDCoDp0E";
+
 export default function CountryNamePage() {
   const [country, setCountry] = useState<Country | null>(null);
   const { countryName } = useParams();
   const [neighbors, setNeighbors] = useState<Country[]>([]);
   const [googleImg, setGoogleImg] = useState("");
-  const GOOGLE_KEY = "AIzaSyAIP9n7rVJZXLDB81HvftDMIbwPDCoDp0E";
 
   const dispatch = useDispatch<AppDispatch>();
 

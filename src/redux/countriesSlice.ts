@@ -25,7 +25,17 @@ export type Country = {
     };
   };
   capital: string[];
+  capitalInfo?: {
+    latlng: [
+      number,
+      number
+    ]
+  },
   region: string;
+  latlng: [
+      number,
+      number
+    ]
   cca3: string,
   borders: string[]
   maps: {
@@ -104,9 +114,9 @@ export const fetchCountries = createAsyncThunk<
         try {
             let res
             if(region === "All"){
-              res = await fetch(BASE_URL + "all/" + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders");
+              res = await fetch(BASE_URL + "all/" + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders,latlng");
             }else{
-              res = await fetch(BASE_URL + "region/" + region + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders");
+              res = await fetch(BASE_URL + "region/" + region + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders,latlng");
             }
             if (!res.ok) return rejectWithValue("Failed to fetch");
             const data: Country[] = await res.json()

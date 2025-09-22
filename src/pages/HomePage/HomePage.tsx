@@ -5,6 +5,7 @@ import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import { usePreloadMedia } from "../../config/usePreloadMedia";
 import { MEDIA } from "../../config/media";
@@ -27,6 +28,10 @@ export default function HomePage() {
           <Link className={styles.link} to="/collection">
             <FontAwesomeIcon icon={faBookmark} className={styles.icon} />
             Collection
+          </Link>
+          <Link className={styles.link} to="/game">
+            <FontAwesomeIcon icon={faMapLocationDot} className={styles.icon} />
+            Streetview Game
           </Link>
           <Link className={styles.link} to="/quiz">
             <FontAwesomeIcon icon={faFlag} className={styles.icon} />
