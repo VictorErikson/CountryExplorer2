@@ -47,9 +47,11 @@ export default function CountryCard({ country }: CountryCardProps) {
               {region}
             </p>
           ) : (
-            <p className={`${styles.region} ${REGION_CLASS[region]}`}>
-              {capital[0]}
-            </p>
+            capital?.[0] && (
+              <p className={`${styles.region} ${REGION_CLASS[region]}`}>
+                {capital[0]}
+              </p>
+            )
           )}
         </div>
       </div>

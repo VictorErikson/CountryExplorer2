@@ -10,8 +10,10 @@
   &:hover {
     background: #252945;
 
-    .likeBtn.heart {
-      color: #1c2333;
+    .likeBtn {
+      .heart {
+        color: #b6bcca;
+      }
     }
   }
   .left {
@@ -37,51 +39,42 @@
       }
 
       .region {
-        display: inline-flex; /* size to content */
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 2px 12px;
-
-        min-width: 84px; /* floor */
-        width: fit-content; /* content-based width */
+        min-width: 84px;
+        width: fit-content;
         box-sizing: border-box;
-
-        flex: 0 0 auto; /* if it's inside a flex parent */
+        flex: 0 0 auto;
         max-width: 100%;
-        // padding: 2px 12px;
-        // width: auto;
-        // min-width: 84px;
-
         border-radius: 999px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
       }
 
       .europe {
         background-color: #aa9ff4;
         color: #3727a3;
-      } /* darker lavender */
+      }
       .asia {
         background-color: #f099ba;
         color: #6b2e46;
-      } /* darker rose */
+      }
       .oceania {
         background-color: #6e9de4;
         color: #233c68;
-      } /* darker sky blue */
+      }
       .americas {
         background-color: #f7c885;
         color: #5b3a1f;
-      } /* darker peach */
+      }
       .africa {
         background-color: #9be1a0;
         color: #295c31;
-      } /* darker mint */
+      }
       .antarctic {
         background-color: #c8e0f4;
         color: #2f3f4a;
-      } /* darker icy blue */
+      }
     }
   }
 

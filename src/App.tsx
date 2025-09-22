@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import CountriesPage from "./pages/CountriesPage/CountriesPage";
-import CountryNamePage from "./pages/CountryNamePage";
+import CountryNamePage from "./pages/CountryNamePage/CountryNamePage";
 import CollectionPage from "./pages/CollectionPage";
 import QuizPage from "./pages/QuizPage";
 import LeaderboardPage from "./pages/LeaderboardPage";

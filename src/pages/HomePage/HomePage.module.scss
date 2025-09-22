@@ -17,6 +17,17 @@
   .logo {
     width: 150px;
     padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* how far up it moves */
+    }
   }
 
   .link {

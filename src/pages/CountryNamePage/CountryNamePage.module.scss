@@ -1,0 +1,235 @@
+.main {
+  padding: 60px 0px;
+  max-width: 800px;
+
+  .country {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    .flagCont {
+      position: relative;
+      .flag {
+        width: 80vw;
+        max-width: 800px;
+        border-radius: 40px;
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+
+        img {
+          display: block;
+          width: 100%; /* responsive */
+          height: auto;
+        }
+      }
+      .flag::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40%; /* how tall the gradient should be */
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+      .fifa {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Gasoek One", sans-serif;
+        line-height: 1;
+        white-space: nowrap;
+        pointer-events: none;
+        text-shadow: -10px -10px 0 black, 10px -10px 0 black, -10px 10px 0 black,
+          10px 10px 0 black;
+        // text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+        //   1px 1px 0 black;
+        font-weight: 400;
+        opacity: 0%;
+      }
+
+      .likeBtn {
+        position: absolute;
+        right: 5%;
+        bottom: 5%;
+        z-index: 1;
+        height: 60px;
+        width: 60px;
+        background: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        cursor: pointer;
+        border: 3px solid white;
+        border-radius: 9999px;
+        margin: 0px;
+        transition: transform 0.3s ease;
+        // box-shadow: 0 0 0 1px rgb(97, 97, 97);
+
+        .heart {
+          color: #ffffff;
+          font-size: 35px;
+          display: block;
+          transform-origin: center center;
+          padding-top: 5px;
+
+          //   stroke: rgb(97, 97, 97); /* outline */
+          //   stroke-width: 20px;
+        }
+
+        &:hover {
+          //   transform: scale(1.1);
+          //   border: 3px solid #eb0505;
+          .heart {
+            color: #eb0505;
+            animation: pulse 1.2s ease-in-out infinite alternate;
+          }
+        }
+      }
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.08);
+        } /* adjust intensity */
+      }
+
+      /* Respect reduced-motion */
+      @media (prefers-reduced-motion: reduce) {
+        .pulse-wrap:hover .pulse-target {
+          animation: none;
+        }
+      }
+    }
+
+    .middle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80vw;
+      max-width: 800px;
+      gap: 40px;
+      padding-bottom: 20px;
+      @media (max-width: 780px) {
+        gap: 60px;
+        flex-direction: column;
+      }
+      .info {
+        align-self: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        box-sizing: border-box;
+        @media (max-width: 780px) {
+          width: 100%;
+          align-items: center;
+        }
+        .infobox {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        // .middle {
+        //   display: flex;
+        //   //   align-items: center;
+        //   //   justify-content: center;
+        //   width: 80vw;
+        //   max-width: 800px;
+        //   gap: 40px;
+        //   align-items: stretch;
+
+        //   @media (max-width: 780px) {
+        //     gap: 60px;
+        //     flex-direction: column;
+        //     align-items: stretch; // keep stretching in column layout too
+        //   }
+
+        //   .info {
+        //     // align-self: flex-start;
+        //     flex-direction: column;
+        //     gap: 10px;
+        //     width: 50%;
+        //     // height: 100%;
+        //     display: flex;
+        //     justify-content: space-between;
+        //     align-items: flex-start;
+        //     box-sizing: border-box;
+
+        //     @media (max-width: 780px) {
+        //       width: 100%;
+        //       //   align-items: center;
+        //     }
+
+        //     .infobox {
+        //       flex: 1;
+        //       width: 100%;
+        //       //   height: 100%;
+        //       display: flex;
+        //       flex-direction: column;
+        //       justify-content: flex-end;
+        //       align-items: flex-start;
+        //     }
+
+        h2 {
+          margin: 0px;
+          padding-bottom: 10px;
+          font-size: 60px;
+        }
+        h3 {
+          margin: 0px;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          align-items: baseline;
+          span {
+            // font-weight: 900;
+            font-size: x-large;
+            padding-right: 5px;
+          }
+        }
+      }
+      .mapLink {
+        aspect-ratio: 1;
+        width: 50%;
+        overflow: hidden;
+        border-radius: 20px;
+
+        @media (max-width: 780px) {
+          width: 80%;
+        }
+
+        .map {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.9;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+// .fit-text {
+//   font-weight: bold;
+//   text-align: center;
+//   color: black;
+// }
