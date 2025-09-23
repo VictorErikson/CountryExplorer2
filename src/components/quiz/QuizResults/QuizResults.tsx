@@ -44,7 +44,7 @@ export default function QuizResults({
 
   return (
     <div className="QuizResults">
-      <img src={"null"} alt="Logga" />
+      <img src="src/assets/img/logo_White.png" alt="Logga" />
       <h2>Final score: {score}/15</h2>
       {newRecord && (
         <h3>Congratulations, you made it top 3 on the {region}-leaderboard!</h3>

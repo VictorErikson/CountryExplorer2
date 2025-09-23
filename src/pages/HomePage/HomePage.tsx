@@ -31,7 +31,7 @@ export default function HomePage() {
           </Link>
           <Link className={styles.link} to="/game">
             <FontAwesomeIcon icon={faMapLocationDot} className={styles.icon} />
-            Streetview Game
+            Explore Game
           </Link>
           <Link className={styles.link} to="/quiz">
             <FontAwesomeIcon icon={faFlag} className={styles.icon} />

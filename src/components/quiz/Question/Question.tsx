@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import type { Country } from "../../../redux/countriesSlice";
 import type { RootState } from "../../../redux/configureStore";
-import styles from "./Question.module.css";
+import styles from "./Question.module.scss";
 import shuffle from "../../../utils/shuffle";
 import { getNearestPano } from "../../../utils/getNearestPano";
 import { GOOGLE_KEY } from "../../../pages/CountryNamePage/CountryNamePage";
-
 type QuestionProps = {
   country: Country;
   submitAnswer: (isCorrect: boolean) => void;
@@ -60,6 +59,7 @@ export default function Question({
         setSrc(
           `https://www.google.com/maps/embed/v1/streetview?pano=${meta.pano_id}&key=${GOOGLE_KEY}&fov=80&pitch=5&heading=0`
         );
+        // setSrc(meta.pano_id);
         return;
       }
 
@@ -86,6 +86,7 @@ export default function Question({
         if (cm) {
           setBadCountries(updatedBad);
           setEffectiveCountry(c);
+          // setSrc(cm.pano_id);
           setSrc(
             `https://www.google.com/maps/embed/v1/streetview?pano=${cm.pano_id}&key=${GOOGLE_KEY}&fov=80&pitch=5&heading=0`
           );
@@ -133,16 +134,19 @@ export default function Question({
     <div>
       {mapsGame ? (
         src ? (
-          <iframe
-            title={`Street View of ${effectiveCountry.name.common}`}
-            width="640"
-            height="360"
-            style={{ border: 0, borderRadius: 12 }}
-            loading="lazy"
-            allow="accelerometer; gyroscope; fullscreen"
-            src={src}
-          />
-        ) : null
+          <div className={styles.iframeContainer}>
+            <iframe
+              title={`Street View`}
+              width="640"
+              height="360"
+              style={{ border: 0, borderRadius: 12 }}
+              loading="lazy"
+              allow="accelerometer; gyroscope; fullscreen"
+              src={src}
+            />
+          </div>
+        ) : // <MapBox panoId={src} heading={0} pitch={5} />
+        null
       ) : (
         <img
           src={effectiveCountry.flags.svg}

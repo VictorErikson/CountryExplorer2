@@ -6,6 +6,7 @@ import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
 import type { AppDispatch, RootState } from "../../../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCountry, type Country } from "../../../redux/countriesSlice";
+// import { useEffect } from "react";
 
 const REGION_CLASS: string = {
   Europe: styles.europe,
@@ -31,6 +32,11 @@ export default function CountryCard({ country }: CountryCardProps) {
   );
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+
+  // useEffect(() => {
+  //   localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
+  // }, [savedCountries]);
+
   return (
     <div
       onClick={() => {

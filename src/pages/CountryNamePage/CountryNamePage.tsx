@@ -13,11 +13,22 @@ import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
 
 export const GOOGLE_KEY = "AIzaSyAIP9n7rVJZXLDB81HvftDMIbwPDCoDp0E";
 
+type ConvertResponse = {
+  success: boolean;
+  terms: string;
+  privacy: string;
+  query: { from: string; to: string; amount: number };
+  info: { timestamp: number; quote: number };
+  result: number;
+};
+
 export default function CountryNamePage() {
   const [country, setCountry] = useState<Country | null>(null);
   const { countryName } = useParams();
   const [neighbors, setNeighbors] = useState<Country[]>([]);
   const [googleImg, setGoogleImg] = useState("");
+  const [rate, setRate] = useState<number | null>(null);
+  const KEY = "12bc801a1fa18594812963f7da6d1646";
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -28,9 +39,9 @@ export default function CountryNamePage() {
     (state: RootState) => state.countries.savedCountries
   );
 
-  useEffect(() => {
-    localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
-  }, [savedCountries]);
+  // useEffect(() => {
+  //   localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
+  // }, [savedCountries]);
 
   useEffect(() => {
     if (!country?.borders) return;
@@ -47,7 +58,7 @@ export default function CountryNamePage() {
       setNeighbors(json);
     };
 
-    if (country) {
+    if (country && neighborsString) {
       fetchData();
     }
   }, [country]);
@@ -79,12 +90,40 @@ export default function CountryNamePage() {
   }, [country?.name.common, GOOGLE_KEY]);
 
   const firstCurrency = country && Object.values(country.currencies)[0];
+  const [code] = Object.keys(country?.currencies ?? {});
 
-  //Skapa kart-bilden
+  useEffect(() => {
+    let cancelled = false;
+
+    const run = async () => {
+      if (!code) return;
+
+      if (code === "EUR") {
+        if (!cancelled) setRate(null);
+        return;
+      }
+
+      try {
+        const res: ConvertResponse = await fetch(
+          `https://api.exchangerate.host/convert?access_key=${KEY}&from=EUR&to=${code}&amount=1`
+        ).then((r) => r.json());
+
+        if (!cancelled) setRate(res.result);
+      } catch {
+        if (!cancelled) setRate(null);
+      }
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [code, KEY]);
+
   function staticMapForCountry(country: string, key: string) {
     const params = new URLSearchParams({
-      center: country, // Google will geocode the name
-      zoom: "5", // tune per your design
+      center: country,
+      zoom: "5",
       size: "640x360",
       scale: "2",
       maptype: "roadmap",
@@ -137,10 +176,20 @@ export default function CountryNamePage() {
                     {country.population}p
                   </h3>
                   {firstCurrency && (
-                    <h3>
-                      <span>Currency: </span>
-                      {firstCurrency.name} ({firstCurrency.symbol})
-                    </h3>
+                    <>
+                      <h3>
+                        <span>Currency: </span>
+                        {firstCurrency.name} ({firstCurrency.symbol})
+                      </h3>
+
+                      {rate != null && (
+                        <h3>
+                          <span>1 Euro: </span>
+                          {rate.toFixed(2)}
+                          {firstCurrency.symbol}
+                        </h3>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

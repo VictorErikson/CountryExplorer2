@@ -1,0 +1,81 @@
+.GameResults {
+  padding-top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .logo {
+    width: 150px;
+    padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* how far up it moves */
+    }
+  }
+
+  h2 {
+    font-size: xx-large;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .logo {
+    width: 150px;
+    padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+  }
+  button.link {
+    all: unset; /* wipe browser styles */
+    display: inline-flex; /* put back layout */
+    cursor: pointer;
+  }
+  a.link {
+    all: unset; /* remove underline, color, etc. */
+    display: inline-flex;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button.link,
+  a.link {
+    height: 35px;
+    width: 230px;
+    font-size: 25px;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    background: #1c2333;
+    padding: 6px 16px;
+    border-radius: 10px;
+    &:hover {
+      background: #252945;
+      animation: pulse 1.2s ease-in-out infinite alternate;
+      color: rgb(255, 214, 32);
+    }
+  }
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    } /* adjust intensity */
+  }
+
+  /* Respect reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-wrap:hover .pulse-target {
+      animation: none;
+    }
+  }
+}

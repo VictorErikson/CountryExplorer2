@@ -7,7 +7,9 @@ import {
   type Country,
 } from "../../redux/countriesSlice";
 import shuffle from "../../utils/shuffle";
-import GameActive from "../../components/game/GameActive/GameActive";
+import GameActive from "../../components/game/GameActive/GameActive/GameActive";
+import GameResults from "../../components/game/GameResults/GameResults";
+import styles from "./GamePage.module.scss";
 
 export default function GamePage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -55,30 +57,35 @@ export default function GamePage() {
       setGameResults(true);
     }
   };
+  const restart = () => {
+    setI(0);
+    setScore(0);
+    setAnswered(null);
+    setGameActive(true);
+    setGameResults(false);
+  };
 
   return (
-    <div className="gamePage">
-      {gameActive && currentQuestion && (
-        <GameActive
-          i={i}
-          score={score}
-          currentQuestion={currentQuestion}
-          submitAnswer={submitAnswer}
-          next={next}
-        />
-      )}
-      {/* <iframe
-        title={`Street View of ${country.name.common}`}
-        width="640"
-        height="360"
-        style={{ border: 0, borderRadius: 12 }}
-        loading="lazy"
-        allowFullScreen
-        src={src}
-      /> */}
-      {/* {quizResults && (
-        <QuizResults score={score} name={username} restart={restart} />
-      )} */}
-    </div>
+    <main className={styles.gamePage}>
+      <section className={styles.content}>
+        {gameActive && currentQuestion && (
+          <GameActive
+            i={i}
+            score={score}
+            currentQuestion={currentQuestion}
+            submitAnswer={submitAnswer}
+            next={next}
+          />
+        )}
+        {gameResults && !gameActive && (
+          <GameResults score={score} restart={restart} />
+        )}
+      </section>
+      <div className={styles.videoBackground}>
+        <video autoPlay loop muted playsInline>
+          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </main>
   );
 }

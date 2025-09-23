@@ -1,5 +1,6 @@
-import type { Country } from "../../../redux/countriesSlice";
-import Question from "../../quiz/Question/Question";
+import type { Country } from "../../../../redux/countriesSlice";
+import Question from "../../../quiz/Question/Question";
+import styles from "./GameActive.module.scss";
 
 type GameActiveProps = {
   i: number;
@@ -18,8 +19,10 @@ export default function GameActive({
 }: GameActiveProps) {
   return (
     <div className="quizActive">
-      <h3>Question {i + 1} / 15</h3>
-      <h3>Points {score}</h3>
+      <div className={styles.info}>
+        <h3>Question {i + 1} / 15</h3>
+        <h3>Points {score}</h3>
+      </div>
       <Question
         country={currentQuestion}
         submitAnswer={submitAnswer}

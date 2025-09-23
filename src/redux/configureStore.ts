@@ -7,5 +7,13 @@ export const store = configureStore({
     }
 })
 
+store.subscribe(() => {
+  const state = store.getState();
+  localStorage.setItem(
+    "savedCountries",
+    JSON.stringify(state.countries.savedCountries)
+  );
+});
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
