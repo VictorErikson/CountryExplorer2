@@ -7,9 +7,6 @@ import shuffle from "../../../utils/shuffle";
 import { getNearestPano } from "../../../utils/getNearestPano";
 import { GOOGLE_KEY } from "../../../pages/CountryNamePage/CountryNamePage";
 
-// Prefer a single source of truth for the key
-// const GOOGLE_KEY = import.meta.env.VITE_GMAPS_KEY as string;
-
 type QuestionProps = {
   country: Country;
   submitAnswer: (isCorrect: boolean) => void;
@@ -25,7 +22,6 @@ export default function Question({
 }: QuestionProps) {
   const allCountries = useSelector((s: RootState) => s.countries.countries);
 
-  // Local state
   const [chosen, setChosen] = useState<string | null>(null);
   const [locked, setLocked] = useState(false);
   const [effectiveCountry, setEffectiveCountry] = useState<Country>(country);
@@ -33,13 +29,11 @@ export default function Question({
   const [src, setSrc] = useState<string>("");
   const [badCountries, setBadCountries] = useState<Set<string>>(new Set());
 
-  // Keep effectiveCountry in sync with incoming prop; reset src to avoid stale pano
   useEffect(() => {
     setEffectiveCountry(country);
     setSrc("");
   }, [country]);
 
-  // Build answers whenever the effectiveCountry changes
   useEffect(() => {
     const wrong = shuffle(
       allCountries.filter((c) => c.name.common !== effectiveCountry.name.common)
@@ -47,7 +41,6 @@ export default function Question({
     setAnswers(shuffle([...wrong, effectiveCountry]));
   }, [allCountries, effectiveCountry]);
 
-  // Load pano for effectiveCountry; if none exists, pick a replacement country that has one
   useEffect(() => {
     if (!mapsGame) return;
 
@@ -70,7 +63,6 @@ export default function Question({
         return;
       }
 
-      // Mark current as "bad" and search a replacement with pano
       const updatedBad = new Set(badCountries).add(
         effectiveCountry.name.common
       );
@@ -103,7 +95,6 @@ export default function Question({
         }
       }
 
-      // None found → skip this question
       setBadCountries(updatedBad);
       next();
     };
