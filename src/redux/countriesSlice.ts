@@ -114,9 +114,9 @@ export const fetchCountries = createAsyncThunk<
         try {
             let res
             if(region === "All"){
-              res = await fetch(BASE_URL + "all/" + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders,latlng");
+              res = await fetch(BASE_URL + "all/" + "?fields=name,capital,currencies,maps,population,flags,region,borders,latlng,capitalInfo");
             }else{
-              res = await fetch(BASE_URL + "region/" + region + "?fields=name,capital,currencies,maps,population,flags,region,cca3,borders,latlng");
+              res = await fetch(BASE_URL + "region/" + region + "?fields=name,capital,currencies,maps,population,flags,region,borders,latlng,capitalInfo");
             }
             if (!res.ok) return rejectWithValue("Failed to fetch");
             const data: Country[] = await res.json()
