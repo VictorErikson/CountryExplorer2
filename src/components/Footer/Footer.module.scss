@@ -1,49 +1,111 @@
-.footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 40px;
-  box-sizing: border-box;
-  z-index: 1;
-  background: #252945;
-  opacity: 0.96;
+footer {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
   z-index: 10;
 
-  div {
-    width: calc((100% - 80px) / 6);
-    display: flex;
-    justify-content: center;
+  .background {
+    position: relative;
+    padding: 10px 40px; /* keep your horizontal padding */
+    background: linear-gradient(
+      to top,
+      #252945 0%,
+      #252945 75%,
+      transparent 75%,
+      transparent 100%
+    );
   }
+
+  /* The exact area for the 6 equal slots */
+  .track {
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      flex: 1 1 0;
+      display: flex;
+      justify-content: center;
+      align-self: start;
+      position: relative; /* so content layers above the wave */
+      z-index: 1;
+    }
+  }
+
+  /* Link base state */
   .link {
     font-size: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-  }
-  .active {
-    background: #252945;
+
+    gap: 25px;
+    transform: translateY(16px);
+    transition: transform 0.25s ease, gap 0.25s ease;
+
     .iconCont {
-      background: #0b1124;
       width: 40px;
       height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
       border-radius: 9999px;
-      position: absolute;
-      bottom: 50px;
-      .icon {
-      }
+      background: transparent;
+      transition: background-color 0.25s ease, transform 0.25s ease;
     }
 
-    cursor: default;
     span {
-      width: 100%;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.25s ease;
+      will-change: transform;
     }
+    @media (max-width: 800px) {
+      span {
+        display: none;
+      }
+    }
+  }
+
+  /* Active state */
+  .active {
+    gap: 0;
+    transform: translateY(-12px);
+
+    .iconCont {
+      background: #0b1124;
+      transform: translateY(-12px);
+    }
+
+    span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* The sliding wave sits inside .track */
+  .wave {
+    position: absolute;
+    top: -58px;
+    height: 120px;
+
+    fill: #252945;
+    pointer-events: none;
+    z-index: 0;
+    /* Center of slot N = (N + 0.5) / 6 of track width
+       220px / 2 = 110px to center the wave */
+    left: calc((100% / 6) * (var(--slot, 0) + 0.5) - 210px);
+    transition: left 0.35s ease;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  footer .link,
+  footer .link .iconCont,
+  footer .link span,
+  footer .wave {
+    transition: none !important;
   }
 }
