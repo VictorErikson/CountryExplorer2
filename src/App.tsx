@@ -10,7 +10,7 @@ import CountriesPage from "./pages/CountriesPage/CountriesPage";
 import CountryNamePage from "./pages/CountryNamePage/CountryNamePage";
 import CollectionPage from "./pages/CollectionPage/CollectionPage";
 import QuizPage from "./pages/QuizPage/QuizPage";
-import LeaderboardPage from "./pages/LeaderboardPage";
+import LeaderboardPage from "./pages/LeaderboardPage/LeaderboardPage";
 import GamePage from "./pages/GamePage/GamePage";
 import Footer from "./components/Footer/Footer";
 

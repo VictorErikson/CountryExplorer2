@@ -73,6 +73,7 @@ interface CountriesState {
   region: Region;
   status: "Idle" | "Loading" | "Success!" | "Failed";
   error: string | null;
+  europe: Country[]
 }
 
 function loadSavedCountries(): Country[] {
@@ -98,9 +99,10 @@ const initialState: CountriesState = {
   countries: [],
   savedCountries: loadSavedCountries(),
   leaderboard: loadSavedLeaderboard(),
-  region: "All",
+  region: "Europe",
   status: "Idle",
   error: null,
+  europe: []
 };
 
 
@@ -144,7 +146,8 @@ const countriesSlice = createSlice({
         saveResult: (state, action: PayloadAction<{ region: Region; entry: UserScore }>) => {
           const { region, entry } = action.payload;
           if(region !== "All") state.leaderboard[region].push(entry);
-        }
+        },
+        addEurope: (state, action: PayloadAction<Country[]>) => {state.europe = action.payload} 
     },
     extraReducers: (builder) => {
         builder
@@ -162,5 +165,5 @@ const countriesSlice = createSlice({
     }
 })
 
-export const  { saveCountry, selectRegion, saveResult } = countriesSlice.actions
+export const  { saveCountry, selectRegion, saveResult, addEurope } = countriesSlice.actions
 export default countriesSlice.reducer

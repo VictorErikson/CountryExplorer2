@@ -31,8 +31,15 @@ export default function CountriesPage() {
     (state: RootState) => state.countries.countries
   );
   useEffect(() => {
-    dispatch(selectRegion("All"));
+    dispatch(selectRegion("Europe"));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   const europe = localStorage.getItem("Europe");
+  //   if (europe) {
+  //     dispatch(addCountrys(JSON.parse(europe)));
+  //   }
+  // }, []);
 
   useEffect(() => {
     dispatch(fetchCountries(selectedRegion));
@@ -80,17 +87,19 @@ export default function CountriesPage() {
             </ul>
           )}
         </div>
-        <video
-          className={styles.video}
-          src={video}
-          poster={poster}
-          // controls
-          preload="auto"
-          autoPlay
-          muted
-          playsInline
-          loop
-        />
+        <div className="videoCont">
+          <video
+            className={styles.video}
+            src={video}
+            poster={poster}
+            // controls
+            preload="auto"
+            autoPlay
+            muted
+            playsInline
+            loop
+          />
+        </div>
         {countries && (
           <ul>
             {countries.map((country) => (
