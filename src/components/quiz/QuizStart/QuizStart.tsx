@@ -4,67 +4,89 @@ import Continent from "../../icons/Continent/Continent";
 import { ICONS } from "../../icons/Icons";
 import type { AppDispatch, RootState } from "../../../redux/configureStore";
 import { selectRegion } from "../../../redux/countriesSlice";
+import styles from "./QuizStart.module.scss";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 
 type QuizStartProps = {
   errorMsg: string;
-  dropdownOpen: boolean;
-  toggleDropdown: () => void;
   startQuiz: () => void;
   changeUsername: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  changeDropdown: (value: boolean) => void;
 };
 
 export default function QuizStart({
   errorMsg,
-  dropdownOpen,
-  toggleDropdown,
   startQuiz,
   changeUsername,
-  changeDropdown,
 }: QuizStartProps) {
   const regions: Region[] = ["Europe", "Asia", "Oceania", "Americas", "Africa"];
   const selectedRegion = useSelector(
     (state: RootState) => state.countries.region
   );
   const dispatch = useDispatch<AppDispatch>();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev);
+  };
 
+  // const changeDropdown = (value: boolean) => {
+  //   setDropdownOpen(value);
+  // };
   return (
-    <div className="startQuiz">
-      <img src={"null"} alt="Logga" />
-      <h1>Quiz</h1>
-      <label>
-        Username:
-        <input type="text" onChange={(e) => changeUsername(e)} />
-      </label>
-      {errorMsg.length > 0 && <p>{errorMsg}</p>}
-      <label>Select a region:</label>
-      <div className="country-dropdown">
-        <Continent
-          dropdownOpen={dropdownOpen}
-          toggleDropdown={toggleDropdown}
+    <div className={styles.startQuiz}>
+      <section className={styles.section}>
+        <img
+          src="src/assets/img/logo_White.png"
+          alt="Logga"
+          className={styles.logo}
         />
-        {dropdownOpen && (
-          <ul className="dropdown-list">
-            {regions.map((region) => {
-              if (region === selectedRegion) return null;
-              const Icon = ICONS[region];
-              return (
-                <li
-                  key={region}
-                  onClick={() => {
-                    dispatch(selectRegion(region));
-                    changeDropdown(false);
-                  }}
-                >
-                  <Icon className="continent-component" />
-                  {region}
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
-      <button onClick={startQuiz}>Start quiz!</button>
+
+        <h1>Quiz</h1>
+        <label>
+          Username:
+          <input type="text" onChange={(e) => changeUsername(e)} />
+        </label>
+        {errorMsg.length > 0 && <p>{errorMsg}</p>}
+        <label>
+          Select a region:
+          <div className={styles.countryDropdown}>
+            <Continent
+              dropdownOpen={dropdownOpen}
+              toggleDropdown={toggleDropdown}
+            />
+            {dropdownOpen && (
+              <ul className={styles.dropdownList}>
+                {regions.map((region) => {
+                  if (region === selectedRegion) return null;
+                  const iconUrl = ICONS[region];
+                  return (
+                    <li
+                      key={region}
+                      onMouseDown={(e) => {
+                        e.stopPropagation();
+                        dispatch(selectRegion(region));
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      <img
+                        className={styles.icon}
+                        src={iconUrl}
+                        alt={`${region} icon`}
+                      />
+                      {region}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        </label>
+        <button onClick={startQuiz} className={styles.link}>
+          <FontAwesomeIcon icon={faFlag} className={styles.icon} />
+          Start quiz
+        </button>
+      </section>
     </div>
   );
 }

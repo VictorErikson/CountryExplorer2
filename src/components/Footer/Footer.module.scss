@@ -1,0 +1,49 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  box-sizing: border-box;
+  z-index: 1;
+  background: #252945;
+  opacity: 0.96;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+
+  div {
+    width: calc((100% - 80px) / 6);
+    display: flex;
+    justify-content: center;
+  }
+  .link {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .active {
+    background: #252945;
+    .iconCont {
+      background: #0b1124;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 9999px;
+      position: absolute;
+      bottom: 50px;
+      .icon {
+      }
+    }
+
+    cursor: default;
+    span {
+      width: 100%;
+    }
+  }
+}

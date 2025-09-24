@@ -1,14 +1,8 @@
-.gamePage {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0px;
-  // padding: 0px;
-  padding-top: 40px;
+.quizPage {
+  padding-top: 140px;
   position: relative;
   min-height: 100svh;
-
+  box-sizing: border-box;
   .content {
     display: flex;
     flex-direction: column;
@@ -16,6 +10,7 @@
     align-items: center;
     gap: 15px;
   }
+
   .videoBackground {
     position: absolute;
     inset: 0;
@@ -39,5 +34,20 @@
     position: relative;
     z-index: 1; /* ensures text sits above video */
     color: white;
+  }
+}
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  } /* adjust intensity */
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-wrap:hover .pulse-target {
+    animation: none;
   }
 }

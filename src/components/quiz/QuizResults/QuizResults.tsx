@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../redux/configureStore";
 import { saveResult, type UserScore } from "../../../redux/countriesSlice";
 import { Link } from "react-router-dom";
+import styles from "./QuizResults.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFlag,
+  faHouseChimney,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
 
 type QuizResultsProps = {
   score: number;
@@ -43,27 +50,45 @@ export default function QuizResults({
   }, [leaderboard]);
 
   return (
-    <div className="QuizResults">
-      <img src="src/assets/img/logo_White.png" alt="Logga" />
+    <div className={styles.QuizResults}>
+      <img
+        src="src/assets/img/logo_White.png"
+        alt="Logga"
+        className={styles.logo}
+      />
       <h2>Final score: {score}/15</h2>
-      {newRecord && (
-        <h3>Congratulations, you made it top 3 on the {region}-leaderboard!</h3>
-      )}
-      <div className="leaderboard">
-        <h3>{region}, highscore:</h3>
-        {top3 &&
-          top3.map((score: UserScore, i) => (
-            <div className="score">
-              <p className="number">{i + 1}</p>
-              <p>
-                <span>{score.name}:</span> {score.score}
-              </p>
-            </div>
-          ))}
-      </div>
-      <div className="menu">
-        <Link to="/">Home</Link>
-        <button onClick={restart}>Play again!</button>
+      <div className={styles.menu}>
+        {newRecord && (
+          <h3>
+            Congratulations, you made it top 3 on the {region}-leaderboard!
+          </h3>
+        )}
+        <div className={styles.leaderboard}>
+          <h3 className={styles.highscore}>{region}, highscore</h3>
+          {top3 &&
+            top3.map((score: UserScore, i) => (
+              <div className={styles.score}>
+                <p className={styles.number}>{i + 1}</p>
+                <p>
+                  <span>{score.name}:</span> {score.score}
+                </p>
+              </div>
+            ))}
+        </div>
+        <div className={styles.buttonMenu}>
+          <Link to="/" className={styles.link}>
+            <FontAwesomeIcon icon={faHouseChimney} className={styles.icon} />
+            Home
+          </Link>
+          <Link className={styles.link} to="/leaderboard">
+            <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
+            Leaderboard
+          </Link>
+          <button onClick={restart} className={styles.link}>
+            <FontAwesomeIcon icon={faFlag} className={styles.icon} />
+            Play again
+          </button>
+        </div>
       </div>
     </div>
   );

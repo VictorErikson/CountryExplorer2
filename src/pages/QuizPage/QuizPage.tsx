@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../redux/configureStore";
+import type { AppDispatch, RootState } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
 import {
   fetchCountries,
   selectRegion,
   type Country,
-} from "../redux/countriesSlice";
-import shuffle from "../utils/shuffle";
-import QuizResults from "../components/quiz/QuizResults/QuizResults";
-import QuizActive from "../components/quiz/QuizActive/QuizActive";
-import QuizStart from "../components/quiz/QuizStart/QuizStart";
+} from "../../redux/countriesSlice";
+import shuffle from "../../utils/shuffle";
+import QuizResults from "../../components/quiz/QuizResults/QuizResults";
+import QuizActive from "../../components/quiz/QuizActive/QuizActive";
+import QuizStart from "../../components/quiz/QuizStart/QuizStart";
+import styles from "./QuizPage.module.scss";
 
 export default function QuizPage() {
   const [quizActive, setQuizActive] = useState(false);
@@ -41,10 +42,6 @@ export default function QuizPage() {
   useEffect(() => {
     dispatch(fetchCountries(selectedRegion));
   }, [dispatch, selectedRegion]);
-
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
-  };
 
   const startQuiz = () => {
     setErrorMsg("");
@@ -87,34 +84,34 @@ export default function QuizPage() {
     setUsername(e.target.value);
   };
 
-  const changeDropdown = (value: boolean) => {
-    setDropdownOpen(value);
-  };
-
   return (
-    <div className="quizPage">
-      {!quizActive && !quizResults && (
-        <QuizStart
-          errorMsg={errorMsg}
-          dropdownOpen={dropdownOpen}
-          toggleDropdown={toggleDropdown}
-          startQuiz={startQuiz}
-          changeUsername={changeUsername}
-          changeDropdown={changeDropdown}
-        />
-      )}
-      {quizActive && (
-        <QuizActive
-          i={i}
-          score={score}
-          currentQuestion={currentQuestion}
-          submitAnswer={submitAnswer}
-          next={next}
-        />
-      )}
-      {quizResults && (
-        <QuizResults score={score} name={username} restart={restart} />
-      )}
-    </div>
+    <main className={styles.quizPage}>
+      <section className={styles.content}>
+        {!quizActive && !quizResults && (
+          <QuizStart
+            errorMsg={errorMsg}
+            startQuiz={startQuiz}
+            changeUsername={changeUsername}
+          />
+        )}
+        {quizActive && (
+          <QuizActive
+            i={i}
+            score={score}
+            currentQuestion={currentQuestion}
+            submitAnswer={submitAnswer}
+            next={next}
+          />
+        )}
+        {quizResults && (
+          <QuizResults score={score} name={username} restart={restart} />
+        )}
+      </section>
+      <div className={styles.videoBackground}>
+        <video autoPlay loop muted playsInline>
+          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </main>
   );
 }

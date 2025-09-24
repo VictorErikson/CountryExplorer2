@@ -1,12 +1,22 @@
 .iframeContainer {
-  height: 290px;
+  height: 360px;
   width: 640px;
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   border-radius: 20px;
-  padding-bottom: 40px;
+  position: relative;
+  // padding-bottom: 40px;
+
+  iframe {
+    position: absolute;
+    bottom: 0; /* anchor to bottom-right corner */
+    right: 0;
+    transform-origin: bottom center;
+    scale: 1.23;
+    display: block;
+  }
 }
 
 .answers {
@@ -50,7 +60,7 @@
   }
 
   .answerBtn:disabled {
-    opacity: 0.6;
+    opacity: 0.8;
     cursor: not-allowed;
   }
 }
@@ -67,4 +77,17 @@
   .pulse-wrap:hover .pulse-target {
     animation: none;
   }
+}
+h2 {
+  font-size: 28px;
+  text-align: center;
+  min-height: 2.25rem;
+  line-height: 2.25rem;
+}
+
+.flag {
+  width: 80vw;
+  max-width: 800px;
+  // margin-bottom: 80px;
+  border-radius: 20px;
 }

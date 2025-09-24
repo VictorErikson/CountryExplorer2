@@ -1,0 +1,138 @@
+.QuizResults {
+  //   padding-top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px;
+  margin-top: 40px;
+  padding: 60px 40px;
+  padding-top: 80px;
+  border-radius: 20px;
+  gap: 40px;
+  background: #0b15368e;
+  position: relative;
+
+  .logo {
+    width: 150px;
+    padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+    position: absolute;
+    top: -75px;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  h2,
+  h3 {
+    margin: 0px;
+  }
+  h2 {
+    font-size: 48px;
+    padding-top: 20px;
+  }
+  h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15px;
+    .leaderboard {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .highscore {
+        font-size: 32px;
+      }
+      .score {
+        display: flex;
+        align-items: center;
+        font-size: 28px;
+        gap: 20px;
+        padding-left: 60px;
+        .number {
+          border: 2px solid white;
+          border-radius: 9999px;
+          font-size: 20px;
+          aspect-ratio: 1;
+          height: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 4px;
+        }
+      }
+    }
+  }
+  .logo {
+    width: 150px;
+    padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+  }
+  .buttonMenu {
+    display: flex;
+    gap: 15px;
+    @media (max-width: 700px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  button.link {
+    all: unset;
+    display: inline-flex;
+    cursor: pointer;
+  }
+  a.link {
+    all: unset;
+    display: inline-flex;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button.link,
+  a.link {
+    height: 35px;
+    width: 160px;
+    font-size: 25px;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    background: #1c2333;
+    padding: 6px 16px;
+    border-radius: 10px;
+    &:hover {
+      background: #252945;
+      animation: pulse 1.2s ease-in-out infinite alternate;
+      color: rgb(255, 214, 32);
+    }
+  }
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    } /* adjust intensity */
+  }
+
+  /* Respect reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-wrap:hover .pulse-target {
+      animation: none;
+    }
+  }
+}

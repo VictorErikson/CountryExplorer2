@@ -1,20 +1,22 @@
 .collectionPage {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
-  width: 60vw;
-  min-width: 410px;
-  max-width: 830px;
-  margin-left: 20px;
-  margin-right: 20px;
   position: relative;
-  min-height: 100svh;
+  flex: 1 0 auto;
+
   .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    width: 100%;
+    min-width: 410px;
+    max-width: 860px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   h1 {
     font-size: xxx-large;
@@ -26,8 +28,11 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
+    max-width: 575px;
     @media (min-width: 1170px) {
       grid-template-columns: 1fr 1fr;
+      max-width: 860px;
     }
   }
   .videoBackground {

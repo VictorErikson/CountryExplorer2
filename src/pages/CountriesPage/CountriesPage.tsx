@@ -44,59 +44,66 @@ export default function CountriesPage() {
 
   return (
     <main className={styles.main}>
-      {selectedRegion === "All" ? (
-        <h1>All Countrys</h1>
-      ) : (
-        <h1>{selectedRegion}</h1>
-      )}
-      <div className={styles.countryDropdown}>
-        <Continent
-          dropdownOpen={dropdownOpen}
-          toggleDropdown={toggleDropdown}
+      <section className={styles.content}>
+        {selectedRegion === "All" ? (
+          <h1>All Countrys</h1>
+        ) : (
+          <h1>{selectedRegion}</h1>
+        )}
+        <div className={styles.countryDropdown}>
+          <Continent
+            dropdownOpen={dropdownOpen}
+            toggleDropdown={toggleDropdown}
+          />
+          {dropdownOpen && (
+            <ul className={styles.dropdownList}>
+              {regions.map((region) => {
+                if (region === selectedRegion) return null;
+                const iconUrl = ICONS[region];
+                return (
+                  <li
+                    key={region}
+                    onClick={() => {
+                      dispatch(selectRegion(region));
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    <img
+                      className={styles.icon}
+                      src={iconUrl}
+                      alt={`${region} icon`}
+                    />
+                    {region}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+        <video
+          className={styles.video}
+          src={video}
+          poster={poster}
+          // controls
+          preload="auto"
+          autoPlay
+          muted
+          playsInline
+          loop
         />
-        {dropdownOpen && (
-          <ul className={styles.dropdownList}>
-            {regions.map((region) => {
-              if (region === selectedRegion) return null;
-              const iconUrl = ICONS[region];
-              return (
-                <li
-                  key={region}
-                  onClick={() => {
-                    dispatch(selectRegion(region));
-                    setDropdownOpen(false);
-                  }}
-                >
-                  <img
-                    className={styles.icon}
-                    src={iconUrl}
-                    alt={`${region} icon`}
-                  />
-                  {region}
-                </li>
-              );
-            })}
+        {countries && (
+          <ul>
+            {countries.map((country) => (
+              <CountryCard key={country.name.common} country={country} />
+            ))}
           </ul>
         )}
+      </section>
+      <div className={styles.videoBackground}>
+        <video autoPlay loop muted playsInline>
+          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+        </video>
       </div>
-      <video
-        className={styles.video}
-        src={video}
-        poster={poster}
-        // controls
-        preload="auto"
-        autoPlay
-        muted
-        playsInline
-        loop
-      />
-      {countries && (
-        <ul>
-          {countries.map((country) => (
-            <CountryCard key={country.name.common} country={country} />
-          ))}
-        </ul>
-      )}
     </main>
   );
 }

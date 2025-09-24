@@ -1,0 +1,14 @@
+.quizActive {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 64px;
+    align-self: center;
+    margin-top: -60px;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,144 @@
+.startQuiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+
+  gap: 15px;
+  position: relative;
+  margin-top: 40px;
+
+  .logo {
+    width: 150px;
+    // padding-bottom: 60px;
+    display: inline-block;
+    animation: floatY 3s ease-in-out infinite;
+    position: absolute;
+    top: -75px;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 60px 40px;
+    padding-top: 40px;
+    border-radius: 20px;
+    gap: 15px;
+    background: #0b15368e;
+    h1 {
+      font-size: 48px;
+      margin: 0px;
+      padding-top: 40px;
+    }
+    label {
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    input {
+      background: none;
+      border: 2px solid #1c2333;
+      border-radius: 8px;
+      font-size: 16px;
+      padding: 8px 12px;
+      color: white;
+    }
+    .countryDropdown {
+      width: 220px;
+      button {
+        font-family: Fredoka, Arial, Helvetica, sans-serif;
+        color: white;
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 100%;
+        font-size: x-large;
+        border: 2px solid #1c2333;
+        border-radius: 40px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+
+        &:hover {
+          background: #1c2333;
+        }
+      }
+      .dropdown-toggle {
+        display: flex;
+        flex-direction: row;
+        font-family: Fredoka, Arial, Helvetica, sans-serif;
+      }
+      .dropdownList {
+        font-size: large;
+        display: flex;
+        flex-direction: column;
+
+        li {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 10px;
+          padding: 6px 12px;
+          gap: 16px;
+
+          &:hover {
+            color: rgb(255, 255, 255);
+            background: #252945;
+          }
+        }
+        .icon {
+          width: 32px;
+          height: 32px;
+          object-fit: contain;
+        }
+      }
+    }
+    button.link {
+      all: unset; /* wipe browser styles */
+      display: inline-flex; /* put back layout */
+      cursor: pointer;
+      height: 35px;
+      width: 230px;
+      font-size: 25px;
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+      background: #1c2333;
+      padding: 6px 16px;
+      margin-top: 20px;
+      border-radius: 10px;
+      &:hover {
+        background: #252945;
+        animation: pulse 1.2s ease-in-out infinite alternate;
+        color: rgb(255, 214, 32);
+      }
+    }
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.08);
+      } /* adjust intensity */
+    }
+  }
+}

@@ -16,7 +16,7 @@ export default function GamePage() {
   const [questions, setQuestions] = useState<Country[]>([]);
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
-  const [answered, setAnswered] = useState<null | boolean>(null);
+  // const [answered, setAnswered] = useState<null | boolean>(null);
   const [gameActive, setGameActive] = useState(true);
   const [gameResults, setGameResults] = useState(false);
 
@@ -44,14 +44,14 @@ export default function GamePage() {
   }, [countries]);
 
   const submitAnswer = (isCorrect: boolean) => {
-    setAnswered(isCorrect);
+    // setAnswered(isCorrect);
     if (isCorrect) setScore((score) => score + 1);
   };
 
   const next = () => {
     if (!isLast) {
       setI((prev) => prev + 1);
-      setAnswered(null);
+      // setAnswered(null);
     } else {
       setGameActive(false);
       setGameResults(true);
@@ -60,7 +60,7 @@ export default function GamePage() {
   const restart = () => {
     setI(0);
     setScore(0);
-    setAnswered(null);
+    // setAnswered(null);
     setGameActive(true);
     setGameResults(false);
   };
