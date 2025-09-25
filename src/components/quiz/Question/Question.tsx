@@ -66,13 +66,27 @@ export default function Question({
       const updatedBad = new Set(badCountries).add(
         effectiveCountry.name.common
       );
-
+      const existingNames = new Set(answers.map((a) => a.name.common));
+      // const candidates = shuffle(
+      //   allCountries.filter(
+      //     (c) =>
+      //       c.name.common !== effectiveCountry.name.common &&
+      //       !updatedBad.has(c.name.common)
+      //   )
+      // );
       const candidates = shuffle(
-        allCountries.filter(
-          (c) =>
-            c.name.common !== effectiveCountry.name.common &&
-            !updatedBad.has(c.name.common)
-        )
+        allCountries.filter((c) => {
+          const name = c.name.common;
+          const coords = c.capitalInfo?.latlng ?? c.latlng;
+          const hasCoords = Array.isArray(coords) && coords.length >= 2;
+
+          return (
+            name !== effectiveCountry.name.common &&
+            !updatedBad.has(name) &&
+            !existingNames.has(name) &&
+            hasCoords
+          );
+        })
       );
 
       for (const c of candidates) {
