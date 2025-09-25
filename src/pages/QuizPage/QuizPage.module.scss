@@ -1,8 +1,12 @@
 .quizPage {
-  padding-top: 140px;
+  padding-top: 60px;
   position: relative;
   min-height: 100svh;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   .content {
     display: flex;
     flex-direction: column;

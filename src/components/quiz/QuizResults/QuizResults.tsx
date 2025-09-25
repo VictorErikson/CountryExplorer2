@@ -68,7 +68,11 @@ export default function QuizResults({
           {top3 &&
             top3.map((score: UserScore, i) => (
               <div className={styles.score}>
-                <p className={styles.number}>{i + 1}</p>
+                <img
+                        className={styles.number}
+                        src={`src/icons/${i + 1}.svg`}
+                        alt={"number " + i + 1}
+                      />
                 <p>
                   <span>{score.name}:</span> {score.score}
                 </p>

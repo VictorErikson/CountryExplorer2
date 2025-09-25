@@ -11,12 +11,12 @@ import oceaniaPoster from "../assets/videos/oceaniaPoster.jpg";
 import allVideo from "../assets/videos/all.mp4";
 import allPoster from "../assets/videos/allPoster.jpg";
 
-import africaHighVideo from "../assets/videos/1080/africa.mp4";
-import americasHighVideo from "../assets/videos/1080/americas.mp4";
-import asiaHighVideo from "../assets/videos/1080/asia.mp4";
-import europeHighVideo from "../assets/videos/1080/europe.mp4";
-import oceaniaHighVideo from "../assets/videos/1080/oceania.mp4";
-import allHighVideo from "../assets/videos/1080/all.mp4";
+// import africaHighVideo from "../assets/videos/1080/africa.mp4";
+// import americasHighVideo from "../assets/videos/1080/americas.mp4";
+// import asiaHighVideo from "../assets/videos/1080/asia.mp4";
+// import europeHighVideo from "../assets/videos/1080/europe.mp4";
+// import oceaniaHighVideo from "../assets/videos/1080/oceania.mp4";
+// import allHighVideo from "../assets/videos/1080/all.mp4";
 
 import type { Region } from "../types";
 
@@ -28,11 +28,11 @@ export const MEDIA: Record<Region, { video: string; poster: string; type?: strin
   Oceania:  { video: oceaniaVideo,  poster: oceaniaPoster,  type: "video/mp4" },
   All:      { video: allVideo,      poster: allPoster,      type: "video/mp4" },
 };
-export const HIGHRES_MEDIA: Record<Region, { video: string; poster: string; type?: string }> = {
-  Africa:   { video: africaHighVideo,   poster: africaPoster,   type: "video/mp4" },
-  Americas: { video: americasHighVideo, poster: americasPoster, type: "video/mp4" },
-  Asia:     { video: asiaHighVideo,     poster: asiaPoster,     type: "video/mp4" },
-  Europe:   { video: europeHighVideo,   poster: europePoster,   type: "video/mp4" },
-  Oceania:  { video: oceaniaHighVideo,  poster: oceaniaPoster,  type: "video/mp4" },
-  All:      { video: allHighVideo,      poster: allPoster,      type: "video/mp4" },
-};
+// export const HIGHRES_MEDIA: Record<Region, { video: string; poster: string; type?: string }> = {
+//   Africa:   { video: africaHighVideo,   poster: africaPoster,   type: "video/mp4" },
+//   Americas: { video: americasHighVideo, poster: americasPoster, type: "video/mp4" },
+//   Asia:     { video: asiaHighVideo,     poster: asiaPoster,     type: "video/mp4" },
+//   Europe:   { video: europeHighVideo,   poster: europePoster,   type: "video/mp4" },
+//   Oceania:  { video: oceaniaHighVideo,  poster: oceaniaPoster,  type: "video/mp4" },
+//   All:      { video: allHighVideo,      poster: allPoster,      type: "video/mp4" },
+// };
