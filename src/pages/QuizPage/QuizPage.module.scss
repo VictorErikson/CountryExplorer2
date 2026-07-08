@@ -1,5 +1,5 @@
 .quizPage {
-  padding-top: 60px;
+  padding-top: clamp(4px, 6svh, 60px);
   position: relative;
   min-height: 99svh;
   box-sizing: border-box;
