@@ -67,13 +67,7 @@ export default function Question({
         effectiveCountry.name.common
       );
       const existingNames = new Set(answers.map((a) => a.name.common));
-      // const candidates = shuffle(
-      //   allCountries.filter(
-      //     (c) =>
-      //       c.name.common !== effectiveCountry.name.common &&
-      //       !updatedBad.has(c.name.common)
-      //   )
-      // );
+
       const candidates = shuffle(
         allCountries.filter((c) => {
           const name = c.name.common;

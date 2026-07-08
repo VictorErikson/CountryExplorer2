@@ -2,11 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../config/api";
+import { apiFetch, adaptCountry, RESPONSE_FIELDS, type ApiResponse } from "../../config/api";
 import { saveCountry, type Country } from "../../redux/countriesSlice";
 import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CountryNamePage.module.scss";
-// import FitText from "../../utils/FitText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
@@ -40,28 +39,26 @@ export default function CountryNamePage() {
     (state: RootState) => state.countries.savedCountries
   );
 
-  // useEffect(() => {
-  //   localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
-  // }, [savedCountries]);
-
   useEffect(() => {
-    if (!country?.borders) return;
-    const neighborsString = country?.borders.join(",");
+    if (!country?.borders || country.borders.length === 0) return;
 
     const fetchData = async () => {
-      const response = await fetch(
-        BASE_URL +
-          "alpha?codes=" +
-          neighborsString +
-          "&fields=name,capital,currencies,maps,population,flags,region,cca3,borders"
+      const responses = await Promise.all(
+        country.borders.map((code) =>
+          apiFetch(`codes.alpha_3/${code}?response_fields=${RESPONSE_FIELDS}`).then(
+            (r) => r.json() as Promise<ApiResponse>
+          )
+        )
       );
-      const json = await response.json();
-      setNeighbors(json);
+      setNeighbors(
+        responses
+          .map((json) => json.data.objects[0])
+          .filter((raw) => raw !== undefined)
+          .map(adaptCountry)
+      );
     };
 
-    if (country && neighborsString) {
-      fetchData();
-    }
+    fetchData();
   }, [country]);
 
   useEffect(() => {
@@ -72,14 +69,12 @@ export default function CountryNamePage() {
       setCountry(found);
     } else {
       const fetchData = async () => {
-        const response = await fetch(
-          BASE_URL +
-            "name/" +
-            countryName +
-            "?fullText=true&fields=name,capital,currencies,maps,population,flags,region,cca3,borders"
+        const response = await apiFetch(
+          `names.common/${countryName}?response_fields=${RESPONSE_FIELDS}`
         );
-        const json = await response.json();
-        setCountry(json[0]);
+        const json: ApiResponse = await response.json();
+        const raw = json.data.objects[0];
+        if (raw) setCountry(adaptCountry(raw));
       };
       fetchData();
     }
@@ -148,7 +143,6 @@ export default function CountryNamePage() {
                     onLoad={() => window.dispatchEvent(new Event("resize"))}
                   />
                 </div>
-                {/* <FitText className={styles.fifa}>{country.cca3}</FitText> */}
                 <button
                   className={styles.likeBtn}
                   aria-label="Like button"
@@ -199,7 +193,12 @@ export default function CountryNamePage() {
                   </div>
                 </div>
 
-                <a href={country.maps.googleMaps} className={styles.mapLink}>
+                <a
+                  href={country.maps.googleMaps}
+                  className={styles.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {googleImg ? (
                     <img
                       src={googleImg}

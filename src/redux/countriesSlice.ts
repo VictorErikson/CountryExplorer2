@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { BASE_URL } from "../config/api";
+import { apiFetch, adaptCountry, RESPONSE_FIELDS, type ApiResponse } from "../config/api";
 import type { Region } from "../types";
 
 export type Country = {
@@ -111,18 +111,27 @@ export const fetchCountries = createAsyncThunk<
   Region, // Argument type 
   { rejectValue: string } // Thunk API config
 >(
-    "posts/fetchCountries", 
-    async (region, { rejectWithValue }) => { 
+    "posts/fetchCountries",
+    async (region, { rejectWithValue }) => {
         try {
-            let res
             if(region === "All"){
-              res = await fetch(BASE_URL + "all/" + "?fields=name,capital,currencies,maps,population,flags,region,borders,latlng,capitalInfo");
+              const objects = [];
+              let offset = 0;
+              while (true) {
+                const res = await apiFetch(`?response_fields=${RESPONSE_FIELDS}&limit=100&offset=${offset}`);
+                if (!res.ok) return rejectWithValue("Failed to fetch");
+                const json: ApiResponse = await res.json();
+                objects.push(...json.data.objects);
+                if (!json.data.meta.more) break;
+                offset += 100;
+              }
+              return objects.map(adaptCountry);
             }else{
-              res = await fetch(BASE_URL + "region/" + region + "?fields=name,capital,currencies,maps,population,flags,region,borders,latlng,capitalInfo");
+              const res = await apiFetch(`region/${region}?response_fields=${RESPONSE_FIELDS}&limit=100`);
+              if (!res.ok) return rejectWithValue("Failed to fetch");
+              const json: ApiResponse = await res.json();
+              return json.data.objects.map(adaptCountry);
             }
-            if (!res.ok) return rejectWithValue("Failed to fetch");
-            const data: Country[] = await res.json()
-            return data
         } catch {
             return rejectWithValue("Network error");
         }
