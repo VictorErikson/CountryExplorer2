@@ -39,6 +39,7 @@ export default function QuizResults({
   }, [dispatch, region, name, score]);
 
   useEffect(() => {
+    if (region === "All") return;
     const sorted = [...leaderboard[region]].sort((a, b) => b.score - a.score);
     const top = sorted.slice(0, 3);
     setTop3(top);

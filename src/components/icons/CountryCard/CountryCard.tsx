@@ -7,7 +7,7 @@ import type { AppDispatch, RootState } from "../../../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCountry, type Country } from "../../../redux/countriesSlice";
 
-const REGION_CLASS: string = {
+const REGION_CLASS: Record<string, string> = {
   Europe: styles.europe,
   Asia: styles.asia,
   Oceania: styles.oceania,

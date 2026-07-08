@@ -16,13 +16,12 @@ import styles from "./QuizPage.module.scss";
 export default function QuizPage() {
   const [quizActive, setQuizActive] = useState(false);
   const [quizResults, setQuizResults] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [questions, setQuestions] = useState<Country[]>([]);
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
-  const [answered, setAnswered] = useState<null | boolean>(null);
+  const [, setAnswered] = useState<null | boolean>(null);
 
   const isLast = i === questions.length - 1;
   const currentQuestion = questions[i];
