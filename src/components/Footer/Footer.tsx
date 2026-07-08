@@ -30,9 +30,17 @@ export default function Footer() {
   let slot = routes.findIndex((r) => r === normalized);
   if (slot < 0) slot = 2; // default to Home
 
+  const isGameOrQuiz = pathname.startsWith("/game") || pathname.startsWith("/quiz");
+
   return (
     <footer className={styles.footer}>
-      <div className={styles.background}>
+      <div
+        className={
+          isGameOrQuiz
+            ? `${styles.background} ${styles.dimmed}`
+            : styles.background
+        }
+      >
         <div
           className={styles.track}
           style={{ ["--slot" as any]: String(slot) }}

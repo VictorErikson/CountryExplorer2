@@ -15,6 +15,11 @@ footer {
       transparent 75%,
       transparent 100%
     );
+    opacity: 0.98;
+
+    &.dimmed {
+      opacity: 0.8;
+    }
   }
 
   /* The exact area for the 6 equal slots */
