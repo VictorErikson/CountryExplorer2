@@ -5,6 +5,14 @@
     font-size: xxx-large;
   }
 
+  .loading {
+    color: white;
+    opacity: 0.8;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 40px 0;
+  }
+
   .countryDropdown {
     button {
       font-family: Fredoka, Arial, Helvetica, sans-serif;
@@ -110,8 +118,8 @@
     color: white;
 
     gap: 20px;
-    width: 60vw;
-    min-width: 410px;
+    // width: 60vw; */
+    min-width: min(410px, 100%);
     max-width: 830px;
   }
 }

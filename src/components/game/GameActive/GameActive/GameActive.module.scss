@@ -2,4 +2,8 @@
   display: flex;
   justify-content: space-between;
   font-size: 24px;
+
+  h3 {
+    margin: clamp(8px, 2.5svh, 24px) 0;
+  }
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/configureStore";
 import {
   fetchCountries,
+  selectCountriesForRegion,
   selectRegion,
   type Country,
 } from "../../redux/countriesSlice";
@@ -23,20 +24,16 @@ export default function GamePage() {
   const isLast = i === questions.length - 1;
   const currentQuestion = questions[i];
 
-  const selectedRegion = useSelector(
-    (state: RootState) => state.countries.region
-  );
-
   useEffect(() => {
     dispatch(selectRegion("All"));
+    const promise = dispatch(fetchCountries("All"));
+    return () => {
+      promise.abort();
+    };
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchCountries(selectedRegion));
-  }, [dispatch, selectedRegion]);
-
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
+  const countries = useSelector((state: RootState) =>
+    selectCountriesForRegion(state.countries)
   );
 
   useEffect(() => {
@@ -44,14 +41,12 @@ export default function GamePage() {
   }, [countries]);
 
   const submitAnswer = (isCorrect: boolean) => {
-    // setAnswered(isCorrect);
     if (isCorrect) setScore((score) => score + 1);
   };
 
   const next = () => {
     if (!isLast) {
       setI((prev) => prev + 1);
-      // setAnswered(null);
     } else {
       setGameActive(false);
       setGameResults(true);
@@ -60,7 +55,6 @@ export default function GamePage() {
   const restart = () => {
     setI(0);
     setScore(0);
-    // setAnswered(null);
     setGameActive(true);
     setGameResults(false);
   };

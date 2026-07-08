@@ -9,29 +9,21 @@ import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import { usePreloadMedia } from "../../config/usePreloadMedia";
 import { MEDIA } from "../../config/media";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../redux/configureStore";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../redux/configureStore";
 import { useEffect } from "react";
-import { addEurope, fetchCountries } from "../../redux/countriesSlice";
+import { fetchCountries } from "../../redux/countriesSlice";
 export default function HomePage() {
   usePreloadMedia(MEDIA, { aggressiveVideos: false }); // prefetch videos, preload posters
   const dispatch = useDispatch<AppDispatch>();
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
-  );
-  const europe = useSelector((state: RootState) => state.countries.europe);
 
   useEffect(() => {
-    if (!europe.length) dispatch(fetchCountries("Europe"));
-  }, [dispatch, europe]);
+    const promise = dispatch(fetchCountries("Europe"));
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
 
-  useEffect(() => {
-    const savedEurope = localStorage.getItem("Europe");
-    if (!savedEurope) {
-      localStorage.setItem("Europe", JSON.stringify(europe));
-      dispatch(addEurope(countries));
-    }
-  }, [europe, countries]);
   return (
     <>
       <main className={styles.mainPage}>

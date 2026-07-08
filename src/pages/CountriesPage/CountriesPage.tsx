@@ -3,7 +3,7 @@ import Continent from "../../components/icons/Continent/Continent";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/configureStore";
 import { ICONS } from "../../components/icons/Icons";
-import { fetchCountries, selectRegion } from "../../redux/countriesSlice";
+import { fetchCountries, selectCountriesForRegion, selectRegion } from "../../redux/countriesSlice";
 import type { Region } from "../../types";
 import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CountriesPage.module.scss";
@@ -27,22 +27,20 @@ export default function CountriesPage() {
   );
   const { video, poster } = MEDIA[selectedRegion];
 
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
+  const countries = useSelector((state: RootState) =>
+    selectCountriesForRegion(state.countries)
   );
+  const status = useSelector((state: RootState) => state.countries.status);
+
   useEffect(() => {
     dispatch(selectRegion("Europe"));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const europe = localStorage.getItem("Europe");
-  //   if (europe) {
-  //     dispatch(addCountrys(JSON.parse(europe)));
-  //   }
-  // }, []);
-
   useEffect(() => {
-    dispatch(fetchCountries(selectedRegion));
+    const promise = dispatch(fetchCountries(selectedRegion));
+    return () => {
+      promise.abort();
+    };
   }, [dispatch, selectedRegion]);
 
   const toggleDropdown = () => {
@@ -92,7 +90,6 @@ export default function CountriesPage() {
             className={styles.video}
             src={video}
             poster={poster}
-            // controls
             preload="auto"
             autoPlay
             muted
@@ -100,7 +97,15 @@ export default function CountriesPage() {
             loop
           />
         </div>
-        {countries && (
+        {status === "Loading" && countries.length === 0 && (
+          <p className={styles.loading}>Loading countries…</p>
+        )}
+        {status === "Failed" && countries.length === 0 && (
+          <p className={styles.loading}>
+            Couldn't load countries — retrying…
+          </p>
+        )}
+        {countries.length > 0 && (
           <ul>
             {countries.map((country) => (
               <CountryCard key={country.name.common} country={country} />

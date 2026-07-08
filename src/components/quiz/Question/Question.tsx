@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import type { Country } from "../../../redux/countriesSlice";
+import { selectCountriesForRegion, type Country } from "../../../redux/countriesSlice";
 import type { RootState } from "../../../redux/configureStore";
 import styles from "./Question.module.scss";
 import shuffle from "../../../utils/shuffle";
 import { getNearestPano } from "../../../utils/getNearestPano";
-import { GOOGLE_KEY } from "../../../pages/CountryNamePage/CountryNamePage";
+
+const GOOGLE_KEY = import.meta.env.VITE_GMAPS_KEY;
+
 type QuestionProps = {
   country: Country;
   submitAnswer: (isCorrect: boolean) => void;
@@ -19,7 +21,9 @@ export default function Question({
   next,
   mapsGame = false,
 }: QuestionProps) {
-  const allCountries = useSelector((s: RootState) => s.countries.countries);
+  const allCountries = useSelector((s: RootState) =>
+    selectCountriesForRegion(s.countries)
+  );
 
   const [chosen, setChosen] = useState<string | null>(null);
   const [locked, setLocked] = useState(false);
@@ -154,7 +158,6 @@ export default function Question({
             />
           </div>
         ) : (
-          // <MapBox panoId={src} heading={0} pitch={5} />
           <div className={styles.iframeContainer}></div>
         )
       ) : (

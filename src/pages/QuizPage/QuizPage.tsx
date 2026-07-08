@@ -3,6 +3,7 @@ import type { AppDispatch, RootState } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
 import {
   fetchCountries,
+  selectCountriesForRegion,
   selectRegion,
   type Country,
 } from "../../redux/countriesSlice";
@@ -30,18 +31,15 @@ export default function QuizPage() {
 
   useEffect(() => {
     dispatch(selectRegion("Europe"));
+    const promise = dispatch(fetchCountries("Europe"));
+    return () => {
+      promise.abort();
+    };
   }, [dispatch]);
 
-  const selectedRegion = useSelector(
-    (state: RootState) => state.countries.region
+  const countries = useSelector((state: RootState) =>
+    selectCountriesForRegion(state.countries)
   );
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
-  );
-
-  useEffect(() => {
-    dispatch(fetchCountries(selectedRegion));
-  }, [dispatch, selectedRegion]);
 
   const startQuiz = () => {
     setErrorMsg("");
