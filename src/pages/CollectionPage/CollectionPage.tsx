@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/configureStore";
 import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CollectionPage.module.scss";
+import earthVideo from "../../assets/videos/earth/1.mp4";
 
 export default function CollectionPage() {
   const savedCountries = useSelector(
@@ -27,7 +28,7 @@ export default function CollectionPage() {
       </section>
       <div className={styles.videoBackground}>
         <video autoPlay loop muted playsInline>
-          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+          <source src={earthVideo} type="video/mp4" />
         </video>
       </div>
     </main>

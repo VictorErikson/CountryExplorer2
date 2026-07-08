@@ -9,6 +9,8 @@ import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import { usePreloadMedia } from "../../config/usePreloadMedia";
 import { MEDIA } from "../../config/media";
+import logo from "../../assets/img/logo_White.png";
+import earthVideo from "../../assets/videos/earth/1.mp4";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../redux/configureStore";
 import { useEffect } from "react";
@@ -29,7 +31,7 @@ export default function HomePage() {
       <main className={styles.mainPage}>
         <section className={styles.content}>
           <img
-            src="src/assets/img/logo_White.png"
+            src={logo}
             alt="logo"
             className={styles.logo}
           />
@@ -57,7 +59,7 @@ export default function HomePage() {
 
         <div className={styles.videoBackground}>
           <video autoPlay loop muted playsInline>
-            <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+            <source src={earthVideo} type="video/mp4" />
           </video>
         </div>
       </main>

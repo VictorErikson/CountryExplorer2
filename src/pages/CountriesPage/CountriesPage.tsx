@@ -8,6 +8,7 @@ import type { Region } from "../../types";
 import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CountriesPage.module.scss";
 import { MEDIA } from "../../config/media";
+import earthVideo from "../../assets/videos/earth/1.mp4";
 
 export default function CountriesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -115,7 +116,7 @@ export default function CountriesPage() {
       </section>
       <div className={styles.videoBackground}>
         <video autoPlay loop muted playsInline>
-          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+          <source src={earthVideo} type="video/mp4" />
         </video>
       </div>
     </main>

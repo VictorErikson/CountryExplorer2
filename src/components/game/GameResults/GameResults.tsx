@@ -4,6 +4,7 @@ import styles from "./GameResults.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseChimney } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+import logo from "../../../assets/img/logo_White.png";
 
 type GameResultsProps = {
   score: number;
@@ -14,7 +15,7 @@ export default function GameResults({ score, restart }: GameResultsProps) {
   return (
     <div className={styles.GameResults}>
       <img
-        src="src/assets/img/logo_White.png"
+        src={logo}
         alt="Logga"
         className={styles.logo}
       />

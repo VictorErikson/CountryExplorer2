@@ -8,6 +8,7 @@ import styles from "./QuizStart.module.scss";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import logo from "../../../assets/img/logo_White.png";
 
 type QuizStartProps = {
   errorMsg: string;
@@ -37,7 +38,7 @@ export default function QuizStart({
     <div className={styles.startQuiz}>
       <section className={styles.section}>
         <img
-          src="src/assets/img/logo_White.png"
+          src={logo}
           alt="Logga"
           className={styles.logo}
         />

@@ -1,6 +1,13 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/configureStore";
 import styles from "./LeaderboardPage.module.scss";
+import logo from "../../assets/img/logo_White.png";
+import earthVideo from "../../assets/videos/earth/1.mp4";
+import numberIcon1 from "../../icons/1.svg";
+import numberIcon2 from "../../icons/2.svg";
+import numberIcon3 from "../../icons/3.svg";
+
+const NUMBER_ICONS = [numberIcon1, numberIcon2, numberIcon3];
 
 export default function LeaderboardPage() {
   const leaderboard = useSelector(
@@ -18,7 +25,7 @@ export default function LeaderboardPage() {
     <div className={styles.leaderboardPage}>
       <section className={styles.allContent}>
         <img
-          src="src/assets/img/logo_White.png"
+          src={logo}
           alt="Logga"
           className={styles.logo}
         />
@@ -37,7 +44,7 @@ export default function LeaderboardPage() {
                     >
                       <img
                         className={styles.number}
-                        src={`src/icons/${i + 1}.svg`}
+                        src={NUMBER_ICONS[i]}
                         alt={"number " + i + 1}
                       />
                       <p>
@@ -53,7 +60,7 @@ export default function LeaderboardPage() {
       </section>
       <div className={styles.videoBackground}>
         <video autoPlay loop muted playsInline>
-          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+          <source src={earthVideo} type="video/mp4" />
         </video>
       </div>
     </div>

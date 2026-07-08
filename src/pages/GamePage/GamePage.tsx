@@ -11,6 +11,7 @@ import shuffle from "../../utils/shuffle";
 import GameActive from "../../components/game/GameActive/GameActive/GameActive";
 import GameResults from "../../components/game/GameResults/GameResults";
 import styles from "./GamePage.module.scss";
+import earthVideo from "../../assets/videos/earth/1.mp4";
 
 export default function GamePage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -77,7 +78,7 @@ export default function GamePage() {
       </section>
       <div className={styles.videoBackground}>
         <video autoPlay loop muted playsInline>
-          <source src="src/assets/videos/earth/1.mp4" type="video/mp4" />
+          <source src={earthVideo} type="video/mp4" />
         </video>
       </div>
     </main>

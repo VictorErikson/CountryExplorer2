@@ -10,6 +10,12 @@ import {
   faHouseChimney,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
+import logo from "../../../assets/img/logo_White.png";
+import numberIcon1 from "../../../icons/1.svg";
+import numberIcon2 from "../../../icons/2.svg";
+import numberIcon3 from "../../../icons/3.svg";
+
+const NUMBER_ICONS = [numberIcon1, numberIcon2, numberIcon3];
 
 type QuizResultsProps = {
   score: number;
@@ -53,7 +59,7 @@ export default function QuizResults({
   return (
     <div className={styles.QuizResults}>
       <img
-        src="src/assets/img/logo_White.png"
+        src={logo}
         alt="Logga"
         className={styles.logo}
       />
@@ -70,10 +76,10 @@ export default function QuizResults({
             top3.map((score: UserScore, i) => (
               <div className={styles.score}>
                 <img
-                        className={styles.number}
-                        src={`src/icons/${i + 1}.svg`}
-                        alt={"number " + i + 1}
-                      />
+                  className={styles.number}
+                  src={NUMBER_ICONS[i]}
+                  alt={"number " + i + 1}
+                />
                 <p>
                   <span>{score.name}:</span> {score.score}
                 </p>
