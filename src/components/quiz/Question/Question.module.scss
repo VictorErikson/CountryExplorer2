@@ -1,6 +1,6 @@
 .iframeContainer {
   height: clamp(240px, 42svh, 360px);
-  width: min(640px, 90vw);
+  max-width: 640px;
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
