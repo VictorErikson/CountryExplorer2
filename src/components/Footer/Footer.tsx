@@ -22,13 +22,12 @@ const routes = [
 export default function Footer() {
   const { pathname } = useLocation();
 
-  // Treat subroutes as their parent tab (add more as needed)
   const normalized = pathname.startsWith("/countries")
     ? "/countries"
     : pathname;
 
   let slot = routes.findIndex((r) => r === normalized);
-  if (slot < 0) slot = 2; // default to Home
+  if (slot < 0) slot = 2; 
 
   const isGameOrQuiz = pathname.startsWith("/game") || pathname.startsWith("/quiz");
 
