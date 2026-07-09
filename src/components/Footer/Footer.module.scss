@@ -7,7 +7,7 @@ footer {
 
   .background {
     position: relative;
-    padding: 10px 40px; /* keep your horizontal padding */
+    padding: 10px 40px; 
     background: linear-gradient(
       to top,
       #252945 0%,
@@ -22,7 +22,6 @@ footer {
     }
   }
 
-  /* The exact area for the 6 equal slots */
   .track {
     position: relative;
     height: 60px;
@@ -34,12 +33,11 @@ footer {
       display: flex;
       justify-content: center;
       align-self: start;
-      position: relative; /* so content layers above the wave */
+      position: relative; 
       z-index: 1;
     }
   }
 
-  /* Link base state */
   .link {
     font-size: 20px;
     display: flex;
@@ -73,7 +71,6 @@ footer {
     }
   }
 
-  /* Active state */
   .active {
     gap: 0;
     transform: translateY(-12px);
@@ -89,7 +86,6 @@ footer {
     }
   }
 
-  /* The sliding wave sits inside .track */
   .wave {
     position: absolute;
     top: -58px;
@@ -98,14 +94,11 @@ footer {
     fill: #252945;
     pointer-events: none;
     z-index: 0;
-    /* Center of slot N = (N + 0.5) / 6 of track width
-       220px / 2 = 110px to center the wave */
     left: calc((100% / 6) * (var(--slot, 0) + 0.5) - 210px);
     transition: left 0.35s ease;
   }
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   footer .link,
   footer .link .iconCont,
