@@ -18,7 +18,6 @@ export default function GamePage() {
   const [questions, setQuestions] = useState<Country[]>([]);
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
-  // const [answered, setAnswered] = useState<null | boolean>(null);
   const [gameActive, setGameActive] = useState(true);
   const [gameResults, setGameResults] = useState(false);
 

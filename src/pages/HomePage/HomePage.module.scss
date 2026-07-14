@@ -82,7 +82,6 @@
     transform: scale(1.08);
   } 
 }
-
 @media (prefers-reduced-motion: reduce) {
   .pulse-wrap:hover .pulse-target {
     animation: none;
