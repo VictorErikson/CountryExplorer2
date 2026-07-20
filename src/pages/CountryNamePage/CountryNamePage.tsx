@@ -11,6 +11,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
 import bgVideo from "../../assets/videos/earth/1.mp4";
 import { sleep, backoffDelay } from "../../utils/retry";
+import BackButton from "../../components/BackButton/BackButton";
 
 type ConvertResponse = {
   success: boolean;
@@ -236,6 +237,7 @@ export default function CountryNamePage() {
 
   return (
     <>
+      <BackButton to="/countries" />
       {!country && countryLoading && (
         <main className={styles.countryNameMain}>
           <p className={styles.loading}>

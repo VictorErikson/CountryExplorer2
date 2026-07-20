@@ -9,6 +9,7 @@ import CountryCard from "../../components/icons/CountryCard/CountryCard";
 import styles from "./CountriesPage.module.scss";
 import { MEDIA } from "../../config/media";
 import earthVideo from "../../assets/videos/earth/1.mp4";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function CountriesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -34,10 +35,6 @@ export default function CountriesPage() {
   const status = useSelector((state: RootState) => state.countries.status);
 
   useEffect(() => {
-    dispatch(selectRegion("Europe"));
-  }, [dispatch]);
-
-  useEffect(() => {
     const promise = dispatch(fetchCountries(selectedRegion));
     return () => {
       promise.abort();
@@ -50,6 +47,7 @@ export default function CountriesPage() {
 
   return (
     <main className={styles.main}>
+      <BackButton to="/" />
       <section className={styles.content}>
         {selectedRegion === "All" ? (
           <h1>All Countrys</h1>

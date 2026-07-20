@@ -3,6 +3,8 @@
   justify-content: center;
   h1 {
     font-size: xxx-large;
+    margin-top: 60px;
+    margin-bottom: 0px;
   }
 
   .loading {
@@ -114,11 +116,10 @@
   }
   .content {
     position: relative;
-    z-index: 1; /* ensures text sits above video */
+    z-index: 1; 
     color: white;
 
     gap: 20px;
-    // width: 60vw; */
     min-width: min(410px, 100%);
     max-width: 830px;
   }

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   fetchCountries,
   selectCountriesForRegion,
-  selectRegion,
   type Country,
 } from "../../redux/countriesSlice";
 import shuffle from "../../utils/shuffle";
@@ -29,13 +28,16 @@ export default function QuizPage() {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const selectedRegion = useSelector(
+    (state: RootState) => state.countries.region
+  );
+
   useEffect(() => {
-    dispatch(selectRegion("Europe"));
-    const promise = dispatch(fetchCountries("Europe"));
+    const promise = dispatch(fetchCountries(selectedRegion));
     return () => {
       promise.abort();
     };
-  }, [dispatch]);
+  }, [dispatch, selectedRegion]);
 
   const countries = useSelector((state: RootState) =>
     selectCountriesForRegion(state.countries)

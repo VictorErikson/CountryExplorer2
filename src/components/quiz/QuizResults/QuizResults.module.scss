@@ -41,6 +41,9 @@
     @media (max-height: 700px) {
       font-size: 32px;
     }
+    @media (max-width: 480px) {
+      font-size: 32px;
+    }
   }
   h3 {
     font-size: 20px;
@@ -64,6 +67,10 @@
       gap: 10px;
       .highscore {
         font-size: 32px;
+
+        @media (max-width: 480px) {
+          font-size: 24px;
+        }
       }
       .score {
         display: flex;
@@ -71,6 +78,10 @@
         font-size: 28px;
         gap: 15px;
         padding-left: 60px;
+
+        @media (max-width: 480px) {
+          padding-left: 0px;
+        }
         .number {
           // border: 2px solid white;
           // border-radius: 9999px;
